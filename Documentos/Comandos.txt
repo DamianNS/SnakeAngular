@@ -1,0 +1,9 @@
+Crear la imagen docker
+docker build . -t snakangular
+
+Ejecutar el docker local
+docker run -d -p 5000:80 --name snakangular snakangular
+
+Para correr la solucion hay que ejecutar primero el:
+ng s (en la carpeta de angular)
+y despues el run en visualstudio
