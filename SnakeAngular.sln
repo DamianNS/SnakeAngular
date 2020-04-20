@@ -13,6 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHupFilesRoot", "GitHupFi
 		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentos", "Documentos", "{2E34A73B-CABC-4D92-805D-D7773424C7DE}"
+	ProjectSection(SolutionItems) = preProject
+		Documentos\ParteEliminadaDePRJ.txt = Documentos\ParteEliminadaDePRJ.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
