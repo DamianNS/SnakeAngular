@@ -1,0 +1,21 @@
+<p>{{idServer}}</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Juego Snake</mat-card-title>
+    <mat-card-subtitle>{{idServer}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="mat-elevation-z8 recuadro">
+      <canvas #canvas class="canvas " width="500" height="500"></canvas>
+    </div>
+    <div>
+      <div>Status: {{statusServer}}</div>
+      <div>Mensaje: {{message}}</div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button [disabled]="ready" (click)="onClickReady()">Listo</button>
+    <button mat-raised-button [disabled]="!ready" (click)="onClickStart()">Iniciar partida</button>
+    <button mat-raised-button [disabled]="!ready" (click)="onClickExit()">Salir</button>
+  </mat-card-actions>
+</mat-card>

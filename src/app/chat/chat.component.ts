@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { BackendService } from '../servicios/backend.service';
 
 @Component({
   selector: 'app-chat',
@@ -19,10 +21,15 @@ export class ChatComponent implements OnInit {
 
   private connection: HubConnection;
 
-  constructor() {
+  constructor(
+    private back: BackendService,
+    private router:Router
+  ) {
     this.connection = new HubConnectionBuilder()
       .withUrl('https://localhost:7064/chathub')
       .build();
+
+
 
     this.connection.on("NewUser", message => this.newUser(message));
     this.connection.on("NewMessage", message => this.newMessage(message));
@@ -79,6 +86,13 @@ export class ChatComponent implements OnInit {
     this.conversation.push({
       userName: 'Sistema',
       message: message
+    });
+  }
+
+  onClikCreateServer() {
+    this.back.crearServer().subscribe(id => {
+      console.log('crearServer', id);
+      this.router.navigate(['juego'], { queryParams: { id: id}});
     });
   }
 
