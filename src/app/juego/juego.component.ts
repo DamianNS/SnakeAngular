@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 
@@ -33,6 +33,31 @@ export class JuegoComponent implements OnInit {
       this.connection.on("Chat", message => this.Chat(message));
       this.connection.on("Status", message => this.Status(message));
   }
+
+  @HostListener('document:keypress', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) { 
+    console.log(event.key);
+    let direccion="";
+    switch(event.key.toLowerCase()){
+      case "w": direccion = "Arriba"; break;
+      case "s": direccion = "Abajo"; break;
+      case "a": direccion = "Izquierda"; break;
+      case "d": direccion = "Derecha"; break;
+      default: return;
+    }
+    event.preventDefault();
+    this.CambioDireccion(direccion);
+  }
+
+  private CambioDireccion(direccion:string){
+    let msg:NewMessage = {
+      command: 3, // direccion
+      serverId: this.idServer,
+      datos:direccion
+    };
+    this.connection.invoke('SendCommand', msg)
+  }
+  
   Status(status: number): any {
     this.statusServer = status;
   }
