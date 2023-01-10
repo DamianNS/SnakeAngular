@@ -11,7 +11,7 @@ export class BackendService {
     private http: HttpClient
   ) { }
 
-  crearServer(): Observable<string> {
-    return this.http.get<string>("https://localhost:7064/api/server/start");
+  crearServer(name:string): Observable<string> {
+    return this.http.get<string>(`https://localhost:7064/api/server/start/${name}`);
   }
 }

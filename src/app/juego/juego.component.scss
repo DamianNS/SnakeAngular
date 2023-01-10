@@ -1,11 +1,33 @@
 .canvas {
-    width: 500;
-    height: 500;
+    width: -webkit-fill-available;
 }
 
 .recuadro {
     border: 5px solid black;
-    width: min-content;
-    height: 510px;
+    height: auto;
     box-sizing: border-box;
+    margin: auto;
+    aspect-ratio: 1/1;
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.jostic {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 100px;
+    width: 200px;
+}
+
+.boton-direccion {
+    flex: 0 32%;
+    height: 33px;
+    margin-bottom: 2%; /* (100-32*3)/2 */
+  }
+
+.controles {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }

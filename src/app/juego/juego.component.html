@@ -8,11 +8,25 @@
     <div class="mat-elevation-z8 recuadro">
       <canvas #canvas class="canvas " width="500" height="500"></canvas>
     </div>
-    <div>
-      <div>Status: {{statusServer}}</div>
-      <div>userName: {{userName}}</div>
-      <div>Mensaje: {{message}}</div>
+    <div class="controles">
+      <div class="jostic">
+        <button mat-button class="boton-direccion" [disabled]="!ready && statusServer != 1"></button>
+        <button mat-stroked-button class="boton-direccion" [disabled]="!ready && statusServer != 1" (click)="onClickUp()">W</button>      
+        <button mat-button class="boton-direccion" [disabled]="!ready && statusServer != 1"></button>
+        <button mat-stroked-button class="boton-direccion" [disabled]="!ready && statusServer != 1" (click)="onClickLeft()">A</button>      
+        <button mat-button class="boton-direccion" [disabled]="!ready && statusServer != 1"></button>
+        <button mat-stroked-button class="boton-direccion" [disabled]="!ready && statusServer != 1" (click)="onClickRight()">D</button>
+        <button mat-button class="boton-direccion" [disabled]="!ready && statusServer != 1"></button>
+        <button mat-stroked-button class="boton-direccion" [disabled]="!ready && statusServer != 1" (click)="onClickDown()">S</button>      
+        <button mat-button class="boton-direccion" [disabled]="!ready && statusServer != 1"></button>
+      </div>
+      <div>
+        <div>Status: {{statusServer}}</div>
+        <div>userName: {{userName}}</div>
+        <div>Mensaje: {{message}}</div>
+      </div>
     </div>
+    
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button [disabled]="ready" (click)="onClickReady()">Listo</button>

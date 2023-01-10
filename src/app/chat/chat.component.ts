@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { MatListOption, MatSelectionListChange } from '@angular/material/list';
 import { Route, Router } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { BackendService } from '../servicios/backend.service';
+
+interface UpdateListServersModel {
+  guid:string;
+  name:string;
+  jugadoresJoined:number;
+}
 
 @Component({
   selector: 'app-chat',
@@ -20,6 +27,9 @@ export class ChatComponent implements OnInit {
   }];
 
   private connection: HubConnection;
+  activeServers:UpdateListServersModel[] = [];
+  serverNameInput:string = "sin nombre";
+  selectedServer: UpdateListServersModel|undefined;
 
   constructor(
     private back: BackendService,
@@ -31,6 +41,11 @@ export class ChatComponent implements OnInit {
     this.connection.on("NewUser", message => this.newUser(message));
     this.connection.on("NewMessage", message => this.newMessage(message));
     this.connection.on("LeftUser", message => this.leftUser(message));
+    this.connection.on("UpdateListServers", message => this.UpdateListServers(message));
+  }
+
+  UpdateListServers(message: UpdateListServersModel[]): any {
+    this.activeServers = message;
   }
 
   ngOnInit(): void {
@@ -90,12 +105,27 @@ export class ChatComponent implements OnInit {
   }
 
   onClikCreateServer() {
-    this.back.crearServer().subscribe(id => {
+    this.back.crearServer(this.serverNameInput).subscribe(id => {
       console.log('crearServer', id);
       this.router.navigate(['juego'], { queryParams: { id: id, name: this.userName}});
     });
   }
 
+  onSelectionChange($event:MatSelectionListChange){
+    console.log($event);
+    if($event.options && $event.options.length > 0){
+      let xserver:MatListOption = $event.options[0];
+      if(xserver){
+        this.selectedServer = xserver.value;        
+      }
+    }
+  }
+
+  onClikJoinServer(){
+    if(this.selectedServer){
+      this.router.navigate(['juego'], { queryParams: { id: this.selectedServer.guid, name: this.userName}});
+    }    
+  }
 }
 
 interface NewMessage {

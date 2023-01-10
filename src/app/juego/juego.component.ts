@@ -110,15 +110,12 @@ export class JuegoComponent implements OnInit {
         break;
       case 1:
         if(updateData.jugador == this.JugadorNumber){
-          this.fillCuadro(updateData.x,updateData.y, "#FF0000");
-          console.log('updatemap', updateData.jugador );
-          
+          this.fillCuadro(updateData.x,updateData.y, "#FF0000");          
         }else{
           this.fillCuadro(updateData.x,updateData.y, "#0000FF");
         }        
         break;
-      case 2: //comida
-        console.log("comida", updateData);        
+      case 2: //comida       
         this.fillCuadro(updateData.x,updateData.y, "#00FF1C");
         break;
     }
@@ -207,5 +204,18 @@ export class JuegoComponent implements OnInit {
   }
   onClickExit(){
     
+  }
+
+  onClickDown(){
+    this.CambioDireccion("Abajo");
+  }
+  onClickLeft(){
+    this.CambioDireccion("Izquierda");
+  }
+  onClickUp(){
+    this.CambioDireccion("Arriba");
+  }
+  onClickRight(){
+    this.CambioDireccion("Derecha");
   }
 }

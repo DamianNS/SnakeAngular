@@ -24,6 +24,20 @@
   <input class="form-control mb-1" type="text" [(ngModel)]="messageToSend" name="messageToSend" />
   <button class="btn btn-primary" (click)="sendMessage()">Send</button>
   <button class="btn btn-secondary" (click)="leave()">Leave</button>
-  <button mat-raised-button color="primary" (click)="onClikCreateServer()">Crear Servidor</button>
+  <mat-card>
+    <mat-card-content>
+      <input class="form-control mb-1" type="text" [(ngModel)]="serverNameInput" name="messageToSend" />
+      <button mat-raised-button color="primary" (click)="onClikCreateServer()">Crear Servidor</button>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-selection-list #shoes [multiple]="false" (selectionChange)="onSelectionChange($event)">
+    <mat-list-option *ngFor="let server of activeServers" [value]="server">
+      {{server.name}} ({{server.jugadoresJoined}})
+    </mat-list-option>
+    <mat-card-footer>
+      <button mat-raised-button color="primary" [disabled]="!selectedServer" (click)="onClikJoinServer()">Entrar al server</button>
+    </mat-card-footer>
+  </mat-selection-list>
 </div>
 
