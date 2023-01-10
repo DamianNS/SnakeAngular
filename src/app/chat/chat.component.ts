@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatListOption, MatSelectionListChange } from '@angular/material/list';
 import { Route, Router } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { environment } from 'src/environments/environment';
 import { BackendService } from '../servicios/backend.service';
 
 interface UpdateListServersModel {
@@ -30,13 +31,14 @@ export class ChatComponent implements OnInit {
   activeServers:UpdateListServersModel[] = [];
   serverNameInput:string = "sin nombre";
   selectedServer: UpdateListServersModel|undefined;
+  private urlBack = environment.urlBack;
 
   constructor(
     private back: BackendService,
     private router:Router
   ) {
     this.connection = new HubConnectionBuilder()
-      .withUrl('https://localhost:7064/chathub')
+      .withUrl(`${this.urlBack}/chathub`)
       .build();
     this.connection.on("NewUser", message => this.newUser(message));
     this.connection.on("NewMessage", message => this.newMessage(message));

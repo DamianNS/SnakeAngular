@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { environment } from 'src/environments/environment';
 
 interface UpdateMapData {
   x:number;
@@ -34,7 +35,8 @@ export class JuegoComponent implements OnInit {
   message = "";
   statusServer = 0;
   userName = 'Sin Nombre';
-
+  private urlBack = environment.urlBack;
+  
   @ViewChild('canvas', { static: true}) myCanvas!: ElementRef;
   JugadorNumber!: number;
   
@@ -42,7 +44,7 @@ export class JuegoComponent implements OnInit {
     private route: ActivatedRoute
   ) { 
     this.connection = new HubConnectionBuilder()
-      .withUrl('https://localhost:7064/serverhub')
+      .withUrl(`${this.urlBack}/serverhub`)
       .build();
 
       this.connection.on("UpdateMap", message => this.UpdateMap(message));
