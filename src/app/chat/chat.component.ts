@@ -28,9 +28,6 @@ export class ChatComponent implements OnInit {
     this.connection = new HubConnectionBuilder()
       .withUrl('https://localhost:7064/chathub')
       .build();
-
-
-
     this.connection.on("NewUser", message => this.newUser(message));
     this.connection.on("NewMessage", message => this.newMessage(message));
     this.connection.on("LeftUser", message => this.leftUser(message));
@@ -41,12 +38,15 @@ export class ChatComponent implements OnInit {
       .then(_ => {
         console.log('Connection Started');
       }).catch(error => {
-        return console.error(error);
+        console.error(error);
       });
   }
 
   public join() {
-    this.connection.invoke('JoinGroup', this.groupName, this.userName)
+    if(this.userName.trim() == ''){
+      alert("ingrese un nombre");
+    }
+    this.connection.invoke('JoinGroup', "Lobby", this.userName)
       .then(_ => {
         this.joined = true;
       });
@@ -92,7 +92,7 @@ export class ChatComponent implements OnInit {
   onClikCreateServer() {
     this.back.crearServer().subscribe(id => {
       console.log('crearServer', id);
-      this.router.navigate(['juego'], { queryParams: { id: id}});
+      this.router.navigate(['juego'], { queryParams: { id: id, name: this.userName}});
     });
   }
 

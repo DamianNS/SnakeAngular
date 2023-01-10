@@ -1,13 +1,7 @@
 <div *ngIf="!joined">
-  <strong>Create a group</strong>
+  <strong>Ingrese con su nombre</strong>
   <div class="form-group row mb-2">
-    <label class="col-form-label col-md-3">Group name</label>
-    <div class="col-md-9">
-      <input type="text" class="form-control" name="groupName" [(ngModel)]="groupName" />
-    </div>
-  </div>
-  <div class="form-group row mb-2">
-    <label class="col-form-label col-md-3">User name</label>
+    <label class="col-form-label col-md-3">Nombre</label>
     <div class="col-md-9">
       <input type="text" class="form-control" name="userName" [(ngModel)]="userName" />
     </div>
@@ -30,6 +24,6 @@
   <input class="form-control mb-1" type="text" [(ngModel)]="messageToSend" name="messageToSend" />
   <button class="btn btn-primary" (click)="sendMessage()">Send</button>
   <button class="btn btn-secondary" (click)="leave()">Leave</button>
+  <button mat-raised-button color="primary" (click)="onClikCreateServer()">Crear Servidor</button>
 </div>
 
-<button mat-raised-button color="primary" (click)="onClikCreateServer()">Crear Servidor</button>
