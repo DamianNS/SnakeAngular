@@ -1,9 +1,23 @@
-  <ul class="navbar-nav flex-grow">
-    <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
-      <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['link-active']">
-      <a class="nav-link text-dark" [routerLink]="['/chat']">Chat</a>
-    </li>
-  </ul>
-<router-outlet></router-outlet>
+<mat-drawer-container class="container">
+  <mat-drawer #drawer [mode]="'push'">
+    <div (click)="drawer.close()">
+      <mat-selection-list [multiple]="false">
+        <mat-list-option [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/']">Home</mat-list-option>
+        <mat-list-option [routerLinkActive]="['link-active']" [routerLink]="['/chat']">Lobby</mat-list-option>
+      </mat-selection-list>
+    </div>    
+  </mat-drawer>
+  <mat-drawer-content class="container">
+    <mat-toolbar>
+      <button mat-icon-button class="example-icon" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Snake Niquel Soft</span>
+      <button mat-button [routerLink]="['/']">Home</button>
+      <button mat-button [routerLink]="['/chat']">Lobby</button>
+    </mat-toolbar>
+    <div class="container">
+      <router-outlet></router-outlet>    
+    </div>    
+  </mat-drawer-content>
+</mat-drawer-container>
